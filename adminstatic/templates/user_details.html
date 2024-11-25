@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Completion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Brush+Script+MT&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Georgia, serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f4f4;
+        }
+        .certificate-container {
+            width: 800px; 
+            height: 600px; 
+            background-color: white; 
+            border: 5px solid #d4af37; 
+            margin: 50px auto; 
+            padding: 20px; 
+            position: relative; 
+            background-image: url('/static/img/certificate.jpg'); 
+            background-size: cover; 
+            background-position: center;
+            overflow: hidden; /* Prevent overflow */
+            box-sizing: border-box; /* Include padding in width/height */
+        }
+        .download-button {
+            display: block; 
+            width: 200px; 
+            padding: 10px; 
+            background-color: #007BFF; 
+            color: white; 
+            text-align: center; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-size: 18px;
+            margin: 0 5px; /* Add some margin between buttons */
+        }
+        .download-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        /* Back button specific styles */
+        .back-button {
+            background-color: #6c757d; /* Grey color for back button */
+        }
+        .button-container {
+            display: flex; /* Use flexbox layout */
+            justify-content: center; /* Center the buttons horizontally */
+            margin: 10px auto; /* Center the container and add margin */
+        }
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+        }
+        .modal-content {
+            background-color: #fefefe; 
+            margin: 15% auto; 
+            padding: 20px; 
+            border: 1px solid #888; 
+            width: 300px; 
+            text-align: center;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa; 
+            float: right; 
+            font-size: 28px; 
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black; 
+            text-decoration: none; 
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function openModal() {
+            document.getElementById('confirmModal').style.display = 'block';
+        }
+        function closeModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+        function confirmDownload(certificateId) {
+            // Redirect to your Django download view
+            window.location.href = "{% url 'download_certificate' 0 %}".replace('0', certificateId);
+            closeModal(); // Close modal after redirect
+        }
+
+        function showRedirectPopup() {
+            document.getElementById('redirectModal').style.display = 'block';
+            // Redirect after a delay of 5 seconds (adjust as needed)
+            setTimeout(function() {
+                window.location.href = "{% url 'home' %}"; // Redirect to the home page
+            }, 5000);
+        }
+
+        // Show redirect popup after 1 minute (60000 milliseconds)
+        setTimeout(showRedirectPopup, 60000);
+
+        function showBackNavigationPopup() {
+            document.getElementById('backModal').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="certificate-container" style="background-image: url('{{ certificate.image.url }}');">
+        <!-- The rest of your certificate HTML structure goes here -->
+    </div>
+
+    <!-- Button Container -->
+    <div class="button-container">
+        <a href="javascript:void(0);" class="download-button back-button" onclick="showBackNavigationPopup()">Back</a>
+        <a href="javascript:void(0);" class="download-button" onclick="openModal()">Download Certificate</a>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Do you want to download this certificate?</p>
+            <button onclick="confirmDownload('{{ certificate.id }}')">Yes</button>
+            <button onclick="closeModal()">No</button>
+        </div>
+    </div>
+
+    <!-- Redirect Notification Modal -->
+    <div id="redirectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>You will be redirected to the home page in 5 seconds.</p>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Back Navigation Modal -->
+    <div id="backModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>You are now navigating back.</p>
+            <button onclick="window.location.href='{% url "home" %}'; closeModal();">Continue</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

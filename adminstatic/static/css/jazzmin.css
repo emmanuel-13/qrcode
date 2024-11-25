@@ -1,0 +1,29 @@
+/* Apply a border to all images */
+img, .brand-link img, .user-avatar img, .site-header img, .site-logo img {
+    border-radius: 50%; /* Makes the image circular */
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensures the image is contained within the circle */
+    border: 2px solid #3498db; /* Adds a solid border with color #3498db */
+}
+
+/* Additional styling for specific elements if needed */
+.nav-item img {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border: 2px dashed #e74c3c; /* Adds a dashed border with color #e74c3c */
+}
+
+.brand-link img, 
+.user-avatar img, 
+.site-header img, 
+.site-logo img, 
+.nav-item img {
+    border-radius: 50% !important;
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover !important;
+    border: 2px solid #3498db !important;
+}

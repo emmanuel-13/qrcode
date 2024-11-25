@@ -1,0 +1,52 @@
+{% load static %}
+<header>
+    <div class="header-area ">
+        <div id="sticky-header" class="main-header-area">
+            <div class="container-fluid ">
+                <div class="header_bottom_border">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-2">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="{% static 'img/ASCON.png' %}" alt="" height="auto", width="50px">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-7">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="{% url "home" %}">home</a></li>
+                                        <li><a href="{% if myabout %} class="nav-link" {% else %} {% url "about" %} {% endif %}">about</a></li>
+                                        <li><a href="{% if mycontact %} class="nav-link" {% else %} {% url "contact" %} {% endif %}">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                            <div class="Appointment">
+                                <div class="d-none d-lg-block">
+                                    <a class="boxed-btn4" href="https://wa.me/09161444754?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20your%20services." target="_blank">
+                                        Call us now
+                                    </a>
+                                </div>
+                        
+                                {% if request.user.is_authenticated %}
+                                <div class="d-none d-lg-block ml-3"> <!-- Add margin-top here -->
+                                    <a class="boxed-btn4" href="/admin">Admin</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
