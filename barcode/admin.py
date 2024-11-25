@@ -33,7 +33,7 @@ class CertificateResource(resources.ModelResource):
             row['name'] = row['name'].title()  # Convert to title case
         
         # Parse and reformat date fields to YYYY-MM-DD
-        date_fields = ['start_date', 'end_date']
+        date_fields = ['start_date', 'end_date', 'issue_date']
         for field in date_fields:
             if row.get(field):
                 try:
@@ -45,7 +45,7 @@ class CertificateResource(resources.ModelResource):
 
     class Meta:
         model = Certificate
-        fields = ('id', 'title', 'name', 'certificate_number', 'start_date', 'end_date')
+        fields = ('id', 'title', 'name', 'certificate_number', 'start_date', 'end_date', 'issue_date')
         skip_unchanged = True
         report_skipped = True
 

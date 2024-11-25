@@ -6,6 +6,7 @@ class Certificate(models.Model):
     certificate_number = models.CharField(max_length=100, unique=True)
     start_date = models.DateField()
     end_date = models.DateField()
+    issue_date = models.DateField()
     image = models.ImageField(upload_to="certificate", default="")
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)

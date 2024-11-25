@@ -156,6 +156,7 @@ def certificate_check(request):
                 'certificate_number': certificate_number,
                 'start_date': certificate.start_date,  # Adjust according to your model field
                 'end_date': certificate.end_date,  # Adjust according to your model field
+                'issue_date': certificate.issue_date,  # Adjust according to your model field
                 'certificate_image': certificate_image_url  # URL of the image
             })
         except Certificate.DoesNotExist:
